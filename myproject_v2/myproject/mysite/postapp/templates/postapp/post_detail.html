@@ -1,0 +1,28 @@
+<head>
+<link rel="stylesheet" type="text/css" href="../../../static/css/border02.css">
+</head>
+
+
+<div class="container-block">
+	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/65984/photo-1413752567787-baa02dde3c65.jpg">
+	<div class="inner-block">
+		<div class="slider-top-right"></div>
+	</div>
+	<div class="block-content">
+{% block content %}
+<article>
+
+<h2>{{ object.title }}</h2>
+<label>作者：</label><a>{{ object.author }}</a><br>
+<small><label>发表时间：</label>{{ object.date_posted|date:"F d, Y" }}</small>
+<p>{{ object.content }}</p>
+
+{% if object.author == user %}
+<a href="{% url 'postapp:post-update' object.id %}"><font color="white">更新</font></a>
+<a href="{% url 'postapp:post-delete' object.id %}"><font color="white">删除</font></a>
+{% endif %}
+<a href="{% url 'postapp:post-home' %}"><font color="white">返回主页</font></a>
+</article>
+{% endblock content %}
+	</div>
+</div>
