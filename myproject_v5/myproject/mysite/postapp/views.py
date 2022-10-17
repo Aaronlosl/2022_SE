@@ -10,6 +10,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import MyPost
+from .mysearch import search_strategy
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -126,8 +127,18 @@ def registerAction(request):
         })
 
 
+
+
 def SearchMyPost(request):
+    obj_titles, obj_pk, obj_set = [], [], []
+    for obj in MyPost.objects.all():
+        obj_titles.append(obj.title)
+        obj_pk.append(obj.pk)
+    pk_list = search_strategy(request.POST['search-content'], obj_titles, obj_pk)
+    for pk in pk_list:
+        obj_set.append(MyPost.objects.get(pk=pk))
+
     context = {
-        'posts':MyPost.objects.filter(title__contains=request.POST['search-content'])
+        'posts':obj_set
     }
     return render(request, 'postapp/home.html', context)

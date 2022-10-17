@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('postapp/', include('postapp.urls')),
+    path('json/',include('jsonresponse.urls')),
 ]
