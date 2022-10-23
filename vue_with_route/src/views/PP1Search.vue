@@ -5,9 +5,9 @@
         leave-active-class="animate__animated animate__fadeOut"
       >
         <div class="fixedSearch" v-show="showFixedSearch">
-          <searchBtn class="searchBtn" href="https://" target="_blank" rel="noopener">
+          <a class="searchBtn" href="https://" target="_blank" rel="noopener">
             <img src="@/assets/箭头二.svg">
-          </searchBtn>
+          </a>
           <textarea 
             class="helping information input box" 
             maxlength="50" 
@@ -16,16 +16,16 @@
             style="resize:none;"
             v-model="searchBox">
           </textarea>
-          <searchBtn href="https://" target="_blank" rel="noopener">
+          <a href="https://" target="_blank" rel="noopener">
             <img src="@/assets/search.svg">
-          </searchBtn>
+          </a>
         </div>
       </transition>
       <br>
 
-      <searchBtn href="https://" target="_blank" rel="noopener">
+      <a href="https://" target="_blank" rel="noopener">
         <img src="@/assets/箭头二.svg">
-      </searchBtn>
+      </a>
       <textarea 
         class="helping information input box" 
         maxlength="50" 
@@ -34,9 +34,9 @@
         style="resize:none;"
         v-model="searchBox">
       </textarea>
-      <searchBtn href="https://" target="_blank" rel="noopener">
+      <a href="https://" target="_blank" rel="noopener">
         <img src="@/assets/search.svg">
-      </searchBtn>
+      </a>
       <div class="box100">100</div>
       <div class="box100">200</div>
       <div class="box100">300</div>

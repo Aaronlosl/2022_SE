@@ -5,9 +5,9 @@
         leave-active-class="animate__animated animate__fadeOut"
       >
         <div class="fixedSearch" v-show="showFixedSearch">
-          <searchBtn class="searchBtn" href="https://" target="_blank" rel="noopener">
+          <a class="searchBtn" href="https://" target="_blank" rel="noopener">
             <img src="@/assets/箭头二.svg">
-          </searchBtn>
+          </a>
           <textarea 
             class="helping information input box" 
             maxlength="50" 
@@ -16,16 +16,16 @@
             style="resize:none;"
             v-model="searchBox">
           </textarea>
-          <searchBtn href="https://" target="_blank" rel="noopener">
+          <a href="https://" target="_blank" rel="noopener">
             <img src="@/assets/search.svg">
-          </searchBtn>
+          </a>
         </div>
       </transition>
       <br>
 
-      <searchBtn href="https://" target="_blank" rel="noopener">
+      <a href="https://" target="_blank" rel="noopener">
         <img src="@/assets/箭头二.svg">
-      </searchBtn>
+      </a>
       <textarea 
         class="helping information input box" 
         maxlength="50" 
@@ -34,9 +34,9 @@
         style="resize:none;"
         v-model="searchBox">
       </textarea>
-      <searchBtn href="https://" target="_blank" rel="noopener">
+      <a href="https://" target="_blank" rel="noopener">
         <img src="@/assets/search.svg">
-      </searchBtn>
+      </a>
       <br>
 
         <a href="https://" target="_blank" rel="noopener">
@@ -81,7 +81,7 @@ export default {
         // 监听页面滚动事件
         window.addEventListener("scroll", this.showSearch)
     },
-    method: {
+    methods: {
       showSearch() {
           // 获取当前滚动条向下滚动的距离
           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -115,7 +115,7 @@ b {
   width: 100%;
   z-index: 999;
   background: #f6f6f6;
-  height: 120px;
+  height: 60px;
   overflow: hidden;
 }
 link1 {
