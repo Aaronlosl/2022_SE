@@ -19,6 +19,16 @@ const routes = [
     path: '/PP1Search',
     name: 'PP1Search',
     component: () => import('../views/PP1Search')
+  },
+  {
+    path: '/PP3Detail',
+    name: 'PP3Detail',
+    component: () => import('../views/PP3Detail')
+  },
+  {
+    path: '/PP1Result',
+    name: 'PP1Result',
+    component: () => import('../views/PP1Result')
   }
 ]
 
