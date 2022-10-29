@@ -65,11 +65,6 @@ import { } from '@element-plus/icons-vue'
 
 const baseURL = 'http://localhost:3000'
 axios.defaults.baseURL = baseURL
-const loginCheck = params => {
-  return axios.post('/login', params).then(res => {
-      return res.data
-  })
-}
 
 export default {
   name: "HelloWorld",
@@ -83,30 +78,27 @@ export default {
     }
   },
   methods:{
-    async Login(){
-      this.form = "&username:" + this.username + "&password:" + this.password
-      // 调用登录请求接口
-      loginCheck(this.form).then(res => {
-        // 登录成功,提示成功信息，然后跳转到首页
-        if(res.meta.status === 200){
-          // 提示成功信息
-          this.$message({
-              message: res.meta.msg,
-              type: 'success'
+    Post() {
+      if(this.username == "" || this.password == "") {
+        alert("Please check your input")
+      } else {
+        // post
+        this.$axios({
+          url: '',
+          method:'post',
+          //发送格式为json
+          data:JSON.stringify({func:'query',
+            param:['3aa3a1fe7fe987945c8a097fa5274d352609b65021de4f0f0f8a4027479e802d']}),
+          headers: {'Content-Type': 'application/json'}
+        }).then(function(return_data) {
+          alert(return_data)
+        },
+        function(return_data)
+        {
+          // TODO: router
+          alert(return_data)
         });
-          var that = this;
-          // 跳转到首页
-          setTimeout(function(){
-              that.$router.push({name:'FirstPage'})
-          },1000)
-        } else {
-          // 登录失败，提示错误信息
-          this.$message({
-              message: 'Login Failed,' + res.meta.msg,
-              type: 'error'
-          });
-        }
-      })
+      }
     }
   }
 }
