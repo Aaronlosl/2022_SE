@@ -1,0 +1,30 @@
+<h1>tiltle</h1>
+<form action="{% url 'jsonresponse:echo' %}" method="post">
+    {% csrf_token %}
+        <p>echo post method</p>
+        <input placeholder="name" type="text" name="name" /><br>
+        <input placeholder="password" type="text" name="password" />
+        <input type="submit" value="搜索">
+    </form>
+
+<form action="{% url 'jsonresponse:echo' %}" method="get">
+    {% csrf_token %}
+        <p>echo get method</p>
+        <input placeholder="name" type="text" name="name" /><br>
+        <input placeholder="password" type="text" name="password" />
+        <input type="submit" value="搜索">
+    </form>
+
+<form action="{% url 'jsonresponse:auth' %}" method="post">
+    {% csrf_token %}
+        <p>auth post method</p>
+        <input placeholder="username" type="text" name="username" /><br>
+        <input placeholder="password" type="text" name="password" />
+        <input type="submit" value="login">
+    </form>
+
+<form action="{% url 'jsonresponse:home' %}" method="get">
+    {% csrf_token %}
+        <p>home</p>
+        <input type="submit" value="home">
+    </form>

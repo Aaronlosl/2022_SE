@@ -1,0 +1,20 @@
+<head>
+<link rel="stylesheet" type="text/css" href="../../static/css/border01.css">
+</head>
+
+<div class="gradient-border" id="box">
+<form action="{% url 'postapp:post-login' %}" method="post">
+{% csrf_token %}
+    <small><small><p>校易APP用户登录界面</p></small></small>
+    <small><small><small><label>用户名</label></small></small></small>
+    <input placeholder="请输入用户名" type="text" name="username" /><br>
+    <small><small><small><label>密码</label></small></small></small>
+    <input placeholder="请输入密码" type="password" name="password" /><br>
+    {% if err_message %}
+    <small><small><small>{{err_message}}</small></small></small>
+    {% endif %}
+
+<big><big><input type="submit" value="登录" name="login"></big></big>
+<small><small><small><small><small><a href="{% url 'postapp:post-register' %}"><font color="white">注册新用户?</font></a></small></small></small></small></small>
+</form>
+</div>
