@@ -1,0 +1,8 @@
+<fieldset>
+<label>用户名：</label><a>{{ author }}</a><br>
+<label>身份：</label><a>{{ identity }}</a><br>
+<label>信息：</label><a>{{ info }}</a><br>
+<label>可选联系信息：</label><a>{{ optical_contact_info }}</a><br>
+</fieldset>
+<a href="{% url 'postapp:update-user-info-view' %}"><font color="pink">更新信息</font></a>
+<a href="{% url 'postapp:post-home' %}"><font color="pink">返回主页</font></a>
