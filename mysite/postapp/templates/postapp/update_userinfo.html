@@ -1,0 +1,10 @@
+<form action="{% url 'postapp:update-user-info' %}" method="post">
+{% csrf_token %}
+<fieldset>
+<label>用户名：</label><a>{{ author }}</a><br>
+<label>身份：</label><input placeholder="请输入新的身份" type="text" name="identity" /><br>
+<label>信息：</label><input placeholder="请输入新的信息" type="text" name="info" /><br>
+<label>可选联系信息：</label><input placeholder="请输入新的联系信息" type="text" name="optical_contact_info" /><br>
+</fieldset>
+<input type="submit" value="提交">
+</form>

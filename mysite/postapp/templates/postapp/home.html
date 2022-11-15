@@ -1,0 +1,60 @@
+<head>
+<title>fieldset Tag</title>
+<style>
+	p{
+	   color:#db7093;
+	   margin-left:440px;
+	   font-size:40px;
+	   font-weight:bold;
+		}
+	form{
+             color:#db7093;
+	width:600px;
+             height:300px;
+	margin:auto;
+	margin-top:30px;}
+	div{
+                 color:white;
+	background-color:#db7093;
+		}
+                  .tx{
+	margin-left:20px;
+		}
+</style>
+</head>
+
+
+<form action="{% url 'postapp:post-search' %}" method="post" class="wd">
+{% csrf_token %}
+<fieldset class="wd" style="border-width: 2px; border-color: #db7093">
+<legend><h1>欢迎使用校易app!</h1></legend>
+    <input placeholder="请输入搜索内容" type="text" name="search-content" />
+    <input type="submit" value="搜索" name="search">
+</fieldset>
+{% if user.is_authenticated %}
+    <a>欢迎，{{ user.username }}</a><br>
+    <a href="{% url 'postapp:post-logout' %}">退出当前账户</a>
+    <a href="{% url 'postapp:post-create' %}">发帖</a>
+    <a href="{% url 'postapp:get-user-info' %}">账户信息</a>
+{% else %}
+    <a href="{% url 'postapp:post-logout' %}">登录</a>
+{% endif %}
+</form>
+
+<fieldset class="wd" style="border-width: 2px; border-color: #db7093">
+<legend><h1><font color=" #db7093">搜索结果</font></h1></legend>
+{% block content %}
+    {% for post in posts %}
+        <fieldset class="wd" style="border-width: 2px; border-color: #db7093">
+        <article>
+        <h2><a href="{% url 'postapp:post-detail' post.id %}"><font color=" #db7093">{{ post.title }}</font></a></h2>
+        <div>       
+        <label>作者：</label><a>{{ post.author }}</a><br>
+        <small><label>发表时间：</label>{{ post.date_posted|date:"F d, Y" }}</small><br>
+        <a>内容：{{ post.content }}</a>
+        </div>
+        </article>
+        </fieldset>
+    {% endfor %}
+{% endblock content %}
+</fieldset>
