@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,JsonResponse
 from urllib3 import Retry
-from postapp.models import MyPost,Friend, UserInfo
+from postapp.models import MyPost, Friend, UserInfo, AdvancedPost
 from django.contrib.auth.models import User
+from django.db.models import Q
 from PIL import Image
 from pathlib import Path
 import json, os
@@ -230,3 +231,41 @@ def show_avatar(request):
         return HttpResponse(image, content_type="image/png")
     else:
         return JsonResponse({"status":-1, "message":"invalid format"})
+
+
+def show_ad_post(request):
+    dic = json.loads(request.body)
+    key1, key2, key3 = dic['academy'], dic['institution'], dic['professor']
+    post_set = AdvancedPost.object.filter(Q(academy__contains=key1) | Q(institution__contains=key2) | Q(professor__contains=key3))
+    content = []
+    cnt = 0
+    for obj in post_set:
+        obj_content = {}
+        obj_content['title'] = obj.title
+        obj_content['content'] = obj.content
+        obj_content['author'] = obj.author.username
+        obj_content['date_posted'] = obj.date_posted
+        obj_content['summary'] = obj.content[0:20]
+        content.append(obj_content)
+        cnt += 1
+        if cnt >= 10:
+            break
+    rep = JsonResponse({"status": 1, "content": content})
+    return rep
+
+
+def receive_ad_post(request):
+    if not 'login_status' in request.COOKIES:
+        rep=JsonResponse({"status":0,"message":"sorry but you are not login"})
+        return rep
+    name=request.COOKIES.get('login_status')
+    if len(User.objects.filter(username=name)) != 1:
+        rep=JsonResponse({'status':-1,'message':'name not found'})
+        return rep
+    dic=json.loads(request.body)
+    post=AdvancedPost(title=dic["title"],content=dic["content"],author=User.objects.filter(username=name)[0],
+                      academy=dic['academy'],institution=dic['institution'],professor=dic['professor'])
+    post.save()
+    rep=JsonResponse({'status':1,'message':'post successfully !'})
+    # rep.delete_cookie('login_status')
+    return rep

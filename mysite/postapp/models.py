@@ -31,3 +31,11 @@ class Friend(models.Model):
     name2 = models.TextField()
     def __str__(self):
         return self.name1+"&"+self.name2
+
+
+class AdvancedPost(MyPost):
+    academy = models.TextField()
+    institution = models.TextField()
+    professor = models.TextField()
+    def __str__(self):
+        return self.academy
