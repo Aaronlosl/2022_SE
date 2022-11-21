@@ -51,7 +51,10 @@ def auth(request):
 def auth(request):
     content={}
     if request.method == 'POST':
+        # formal ver
         dic=json.loads(request.body)
+        # use json/index to test
+        # dic = request.POST
         if ('username' in dic.keys()) and ('password' in dic.keys()):
             if len(User.objects.filter(username=dic['username'])) != 1:
                 rep=JsonResponse({'status':-1,'message':'name not found'})
@@ -69,20 +72,40 @@ def auth(request):
     return rep
 
 def home(request):
+    PG_SIZE = 4 # page size
     content=[]
     if 'login_status' in request.COOKIES:
         cnt=0
-        for obj in MyPost.objects.all().order_by('-date_posted'):
-            obj_content={}
-            obj_content['title']=obj.title
-            obj_content['content']=obj.content
-            obj_content['author']=obj.author.username
-            obj_content['date_posted']=obj.date_posted
-            obj_content['summary']=obj.content[0:20]
-            content.append(obj_content)
-            cnt+=1
-            if cnt>=5:
-                break
+        id = 0
+        page = 1
+
+        _type = "ALL"
+        # formal ver
+        dic=json.loads(request.body)
+        # use json/index to test
+        # dic = request.POST
+        if 'post_type' in dic.keys():
+            _type = dic['post_type']
+        if 'page' in dic.keys():
+            if int(dic['page'])>=1:
+                page = int(dic['page'])
+        if _type=='ALL':
+            blogs=MyPost.objects.all().order_by('-date_posted')
+        else:
+            blogs=MyPost.objects.filter(post_type=_type).order_by('-date_posted')
+        for obj in blogs:
+            id+=1
+            if id>(page-1)*PG_SIZE:
+                obj_content={}
+                obj_content['title']=obj.title
+                obj_content['content']=obj.content
+                obj_content['author']=obj.author.username
+                obj_content['date_posted']=obj.date_posted
+                obj_content['summary']=obj.content[0:20]
+                content.append(obj_content)
+                cnt+=1
+                if cnt>=PG_SIZE:
+                    break
         rep=JsonResponse({"status":1,"content":content})
         # rep.delete_cookie('login_status')
         return rep
@@ -103,7 +126,11 @@ def receive_post(request):
         rep=JsonResponse({'status':-1,'message':'name not found'})
         return rep
     dic=json.loads(request.body)
-    post=MyPost(title=dic["title"],content=dic["content"],author=User.objects.filter(username=name)[0])
+    # if request tells this post have a TYPE
+    _type = "ALL"
+    if 'post_type' in dic.keys():
+        _type = dic['post_type']
+    post=MyPost(title=dic["title"],content=dic["content"],author=User.objects.filter(username=name)[0],post_type=_type)
     post.save()
     rep=JsonResponse({'status':1,'message':'post successfully !'})
     # rep.delete_cookie('login_status')
