@@ -1,0 +1,61 @@
+<h1>title</h1>
+<form action="{% url 'jsonresponse:echo' %}" method="post">
+    {% csrf_token %}
+        <p>echo post method</p>
+        <input placeholder="name" type="text" name="name" /><br>
+        <input placeholder="password" type="text" name="password" />
+        <input type="submit" value="搜索">
+    </form>
+
+<form action="{% url 'jsonresponse:echo' %}" method="get">
+    {% csrf_token %}
+        <p>echo get method</p>
+        <input placeholder="name" type="text" name="name" /><br>
+        <input placeholder="password" type="text" name="password" />
+        <input type="submit" value="搜索">
+    </form>
+
+<form action="{% url 'jsonresponse:auth' %}" method="post">
+    {% csrf_token %}
+        <p>auth post method</p>
+        <input placeholder="username" type="text" name="username" /><br>
+        <input placeholder="password" type="text" name="password" />
+        <input type="submit" value="login">
+    </form>
+
+<form action="{% url 'jsonresponse:home' %}" method="get">
+    {% csrf_token %}
+        <p>home</p>
+        <input type="submit" value="home">
+    </form>
+
+<form action="{% url 'jsonresponse:addFriends' %}" method="post">
+    {% csrf_token %}
+        <p>add friends</p>
+        <input placeholder="name1" type="text" name="name1" /><br>
+        <input placeholder="name2" type="text" name="name2" />
+        <input type="submit" value="newFriends">
+    </form>
+
+<form action="{% url 'jsonresponse:showFriends' %}" method="post">
+    {% csrf_token %}
+        <p>show friends</p>
+        <input placeholder="name" type="text" name="name" /><br>
+        <input type="submit" value="showFriends">
+    </form>
+
+<form action="{% url 'jsonresponse:changeAvatar' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <p>change avatar</p>
+        <input placeholder="name" type="text" name="name"/><br>
+        <input type="file" style="position: absolute" name="avatar"><br><br>
+        <input type="submit" value="changeAvatar">
+</form>
+
+<form action="{% url 'jsonresponse:showAvatar' %}" method="post">
+    {% csrf_token %}
+        <p>show avatar</p>
+        <input placeholder="name" type="text" name="name"/><br>
+        <input type="submit" value="showAvatar">
+</form>
+
