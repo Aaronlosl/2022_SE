@@ -1,7 +1,9 @@
 # 2022 fall SE project
 
-**软工周会记录**
+<img src="./frontend_vue_11.21/src/assets/logo.svg">
 
+**软工周会记录**
+◊
 1. 定选题：郝泽成，封项晨
 2. 第一次报告：吴宏骏，杨嘉文
 3. 补技术：杨嘉文
