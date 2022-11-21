@@ -14,9 +14,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/FirstPage.vue')
-    
+
   },
-  
+
   {
     path: '/InfoList',
     name: 'InfoList',
@@ -38,7 +38,7 @@ const routes = [
     path: '/PP1Search/PP1Result',
     name: 'PP1Result',
     component: () => import('../views/PP1Result.vue'),
-    
+
   },
   {
     path: '/PP1Search/PP1Result/PP1Detail',
@@ -56,7 +56,7 @@ const routes = [
     path: '/PP2Search/PP2Result',
     name: 'PP2Result',
     component: () => import('../views/PP2Result.vue'),
-    
+
   },
   {
     path: '/PP2Search/PP2Result/PP2Detail',
@@ -73,7 +73,7 @@ const routes = [
     path: '/PP3Search/PP3Result',
     name: 'PP3Result',
     component: () => import('../views/PP3Result.vue'),
-    
+
   },
   {
     path: '/PP3Search/PP3Result/PP3Detail',
@@ -88,9 +88,15 @@ const routes = [
   },
 
   {
-    path:'/PostDetail',
+    path: '/PostDetail',
     name: 'PostDetail',
     component: () => import('../views/PostDetail.vue')
+  },
+
+  {
+    path: '/UpdateInfo',
+    name: 'UpdateInfo',
+    component: () => import('../views/UpdateInfo.vue')
   }
 ]
 

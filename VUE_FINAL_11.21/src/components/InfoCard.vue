@@ -13,7 +13,9 @@
     </backBtn>
 
     <moreInfoBtn href="https://" target="_blank" rel="noopener">
-      <img src="@/assets/more-horizontal.svg">
+      <router-link to="/UpdateInfo">
+        <img src="@/assets/more-horizontal.svg">
+      </router-link>
     </moreInfoBtn>
 
     <headPic href="https://" target="_blank" rel="noopener">
