@@ -88,9 +88,21 @@ const routes = [
   },
 
   {
-    path: '/PostDetail',
-    name: 'PostDetail',
-    component: () => import('../views/PostDetail.vue')
+    path: '/PostDetail1',
+    name: 'PostDetail1',
+    component: () => import('../views/PostDetail1.vue')
+  },
+
+  {
+    path: '/PostDetail2',
+    name: 'PostDetail2',
+    component: () => import('../views/PostDetail2.vue')
+  },
+
+  {
+    path: '/PostDetail3',
+    name: 'PostDetail3',
+    component: () => import('../views/PostDetail3.vue')
   },
 
   {

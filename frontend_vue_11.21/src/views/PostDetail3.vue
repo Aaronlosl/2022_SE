@@ -1,4 +1,4 @@
-<!-- 说明：信息发布页
+<!-- 说明：个人发展信息 发布页
 内容：
 根据板块不同有三个入口——每个入口一个vue UI，这里只实现了一种
 个人信息，内容简介，PS须知或其他事项，图片描述——图片描述 -->
@@ -8,7 +8,7 @@
     <h1>
       <img src="@/assets/logo.svg">
     </h1>
-    <h1>Post</h1>
+    <h1>Personal Development Post</h1>
     <h2>
       <p>
         <t style="margin-right: 200px">Name</t><br>
@@ -25,6 +25,8 @@
           v-model="content"></textarea><br>
       </p>
     </h2>
+
+    <!-- TODO：增加图片上传按钮和功能 -->
 
     <button @click="Post()" style="margin-left:200px">
       <img src="@/assets/send.svg">
