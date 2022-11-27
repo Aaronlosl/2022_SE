@@ -18,6 +18,9 @@
     <br>
     <img src="@/assets/分割线.svg">
     <br>
+    <AbstractDis></AbstractDis>
+    <AbstractDis></AbstractDis>
+    <AbstractDis></AbstractDis>
 
     <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
       :date_posted="blog.date_posted">
