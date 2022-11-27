@@ -16,7 +16,11 @@
           v-model="title"></textarea><br>
       </p>
       <p>
-        <t style="margin-right: 185px">Abstract</t><br>
+        <t style="margin-right: 185px">Field</t><br>
+        <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"></textarea><br>
+      </p>
+      <p>
+        <t style="margin-right: 185px">Requirement</t><br>
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"></textarea><br>
       </p>
       <p>
