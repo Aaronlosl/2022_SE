@@ -20,17 +20,17 @@
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"></textarea><br>
       </p>
       <p>
-        <t style="margin-right: 200px">Academy</t><br>
+        <t style="margin-right: 177px">Academy</t><br>
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"
           v-model="academy"></textarea><br>
       </p>
       <p>
-        <t style="margin-right: 200px">Institution</t><br>
+        <t style="margin-right: 175px">Institution</t><br>
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"
           v-model="institution"></textarea><br>
       </p>
       <p>
-        <t style="margin-right: 200px">Professor</t><br>
+        <t style="margin-right: 180px">Professor</t><br>
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"
           v-model="professor"></textarea><br>
       </p>
@@ -41,9 +41,9 @@
       </p>
     </h2>
 
-    <button @click="Post()" style="margin-left:200px">
+    <el-button style="margin-left: 14%; " @click="Post()" type="text">
       <img src="@/assets/send.svg">
-    </button>
+    </el-button>
 
     <!-- TODO：增加图片上传按钮和功能 -->
 

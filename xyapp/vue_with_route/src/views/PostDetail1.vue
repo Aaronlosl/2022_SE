@@ -26,9 +26,9 @@
       </p>
     </h2>
 
-    <button @click="Post()" style="margin-left:200px">
+    <el-button style="margin-left: 14%; " @click="Post()" type="text">
       <img src="@/assets/send.svg">
-    </button>
+    </el-button>
 
     <!-- TODO：增加图片上传按钮和功能 -->
 

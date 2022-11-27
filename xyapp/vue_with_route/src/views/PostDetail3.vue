@@ -16,11 +16,11 @@
           v-model="title"></textarea><br>
       </p>
       <p>
-        <t style="margin-right: 185px">Field</t><br>
+        <t style="margin-right: 210px">Field</t><br>
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"></textarea><br>
       </p>
       <p>
-        <t style="margin-right: 185px">Requirement</t><br>
+        <t style="margin-right: 155px">Requirement</t><br>
         <textarea maxlength="25" placeholder="less than 25 characters" cols="32" style="resize:none;"></textarea><br>
       </p>
       <p>
@@ -32,9 +32,9 @@
 
     <!-- TODO：增加图片上传按钮和功能 -->
 
-    <button @click="Post()" style="margin-left:200px">
+    <el-button style="margin-left: 14%; " @click="Post()" type="text">
       <img src="@/assets/send.svg">
-    </button>
+    </el-button>
 
 
     <navi-box></navi-box>

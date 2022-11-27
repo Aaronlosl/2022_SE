@@ -32,6 +32,7 @@
       <img src="@/assets/search.svg">
     </el-button>
     <router-link to='/PP3Search/PP3Result'>
+      
       <img src="@/assets/search.svg" style="margin-bottom: 15px;">
     </router-link>
     <RouterView></RouterView>
