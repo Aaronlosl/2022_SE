@@ -42,9 +42,9 @@
       </p>
     </h2>
 
-    <button @click="Search()" style="margin-left:200px">
+    <el-button style="margin-left: 14%; " @click="Post()" type="text">
       <img src="@/assets/箭头一.svg">
-    </button>
+    </el-button>
 
     <router-view></router-view>
 
