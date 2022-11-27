@@ -28,6 +28,9 @@
     <el-input v-model="searchBox" maxlength="50" placeholder="less than 50 chars" suffix-icon="el-icon-search"
       clearable>
     </el-input>
+    <el-button @click="Search()">
+      <img src="@/assets/search.svg">
+    </el-button>
     <router-link to='/PP3Search/PP3Result'>
       <img src="@/assets/search.svg" style="margin-bottom: 15px;">
     </router-link>
@@ -62,6 +65,16 @@ export default {
         this.showFixedSearch = true;
       } else {
         this.showFixedSearch = false;
+      }
+    },
+
+    Search() {
+      if (this.searchBox == "") {
+        alert("Please check your input")
+      } else {
+        this.$router.push({
+            path: `/PP3Search/PP3Result/${this.searchBox}`
+        })
       }
     },
   }

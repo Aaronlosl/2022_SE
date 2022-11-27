@@ -35,7 +35,7 @@ const routes = [
     component: () => import('../views/PP1Search.vue'),
   },
   {
-    path: '/PP1Search/PP1Result',
+    path: '/PP1Search/PP1Result/:search_content',
     name: 'PP1Result',
     component: () => import('../views/PP1Result.vue'),
 
@@ -70,7 +70,7 @@ const routes = [
     component: () => import('../views/PP3Search.vue'),
   },
   {
-    path: '/PP3Search/PP3Result',
+    path: '/PP3Search/PP3Result/:search_content',
     name: 'PP3Result',
     component: () => import('../views/PP3Result.vue'),
 

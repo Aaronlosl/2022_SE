@@ -3,11 +3,15 @@
         <img src="@/assets/多媒体卡片2.png">
         <img src="@/assets/多媒体卡片2.png">
     </router-link>
+    <p>{{ title }}</p>
+    <p>{{ date_posted }}</p>
+    <p>{{ summary}}</p>
 </template>
 
 <script>
 export default {
     name: "AbstractDis1",
+    props: ['title', 'summary', 'date_posted']
 }
 
 const info_img = document.createElement("img");

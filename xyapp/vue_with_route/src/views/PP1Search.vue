@@ -40,6 +40,9 @@
     <el-input v-model="searchBox" maxlength="50" placeholder="less than 50 chars" suffix-icon="el-icon-search"
       clearable>
     </el-input>
+    <el-button @click="Search()">
+      <img src="@/assets/search.svg">
+    </el-button>
     <router-link to='/PP1Search/PP1Result'>
       <img src="@/assets/search.svg" style="margin-bottom: 15px;">
     </router-link>
@@ -51,6 +54,20 @@
 
 <script>
 import NaviBox from '@/components/NaviBox.vue';
+
+import axios from "axios"
+import { } from '@element-plus/icons-vue'
+
+// ensure csrf-token append to post requests
+// https://www.freesion.com/article/8944598323/
+axios.interceptors.request.use((config) => {
+  config.headers['X-Requested-With'] = 'XMLHttpRequest';
+  let regex = /.*csrftoken=([^;.]*).*$/; // 用于从cookie中匹配 csrftoken值
+  config.headers['X-CSRFToken'] = document.cookie.match(regex) === null ? null : document.cookie.match(regex)[1];
+  return config
+});
+
+
 export default {
   components: { NaviBox },
   name: 'PP1Search',
@@ -58,7 +75,7 @@ export default {
     return {
       showFixedSearch: false,
       showFixedBottom: false,
-      searchBox: ''
+      searchBox: "",
     }
   },
   mounted() {
@@ -74,6 +91,16 @@ export default {
         this.showFixedSearch = true;
       } else {
         this.showFixedSearch = false;
+      }
+    },
+
+    Search() {
+      if (this.searchBox == "") {
+        alert("Please check your input")
+      } else {
+        this.$router.push({
+            path: `/PP1Search/PP1Result/${this.searchBox}`
+        })
       }
     },
   }

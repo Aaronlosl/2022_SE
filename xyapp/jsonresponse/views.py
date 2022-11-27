@@ -8,6 +8,7 @@ from django.db.models import Q
 from PIL import Image
 from pathlib import Path
 import json, os
+from postapp.mysearch import search_strategy
 # Create your views here.
 def echo(request):
     content={}
@@ -78,7 +79,7 @@ def home(request):
         cnt=0
         id = 0
         page = 1
-
+        search_content = ""
         _type = "ALL"
         # formal ver
         try:
@@ -90,13 +91,30 @@ def home(request):
             if 'page' in dic.keys():
                 if int(dic['page'])>=1:
                     page = int(dic['page'])
+            if 'search' in dic.keys():
+                search_content = dic['search']
         except:
             pass
         if _type=='ALL':
             blogs=MyPost.objects.all().order_by('-date_posted')
         else:
             blogs=MyPost.objects.filter(post_type=_type).order_by('-date_posted')
-        for obj in blogs:
+        # search in *blogs*
+        if search_content == '':
+            searched_blogs = blogs
+        else:
+            #search now
+            print("search")
+            print(search_content)
+            obj_titles, obj_pk, searched_blogs = [], [], []
+            for ob in blogs:
+                obj_titles.append(ob.title)
+                obj_pk.append(ob.pk)
+            pk_list = search_strategy(search_content, obj_titles, obj_pk)
+            for pk in pk_list:
+                searched_blogs.append(MyPost.objects.get(pk=pk))
+
+        for obj in searched_blogs:
             id+=1
             if id>(page-1)*PG_SIZE:
                 obj_content={}
