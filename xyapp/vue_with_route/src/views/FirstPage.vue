@@ -6,6 +6,7 @@
 
 <template>
   <div class="PP_entry">
+  <div class="head">
     <router-link to='/PP1Search'>
       <img src="@/assets/子页面1按钮.svg">
     </router-link>
@@ -17,16 +18,15 @@
     </router-link>
     <br>
     <img src="@/assets/分割线.svg">
-    <br>
-    <AbstractDis></AbstractDis>
-    <AbstractDis></AbstractDis>
-    <AbstractDis></AbstractDis>
+    </div>
+    <br/>
 
     <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
       :date_posted="blog.date_posted">
-    </AbstractDis><br>
-
-    <navi-box></navi-box>
+    </AbstractDis><br/>
+    <div class="fixed">
+      <navi-box></navi-box>
+    </div>
   </div>
 </template>
 
@@ -88,6 +88,24 @@ export default {
 </script>
 
 <style scoped>
+.fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  background: #fff;
+  /*height: calc(96rpx + env(safe-area-inset-bottom));*/
+  /*padding-bottom: env(safe-area-inset-bottom);*/
+}
+.head {
+  position: -webkit-sticky;
+  position: sticky;
+  top:0px;
+  background: #fff;
+}
 h3 {
   margin: 0px 0px 60px;
 }
