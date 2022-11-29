@@ -66,7 +66,6 @@
         letter-spacing: 0em;
         color: #3D3D3D;">
     </router-link>
-    <el-button type="primary">Upload Profile Photo<i class="el-icon-upload el-icon--right"></i></el-button>
 </template>
 
 <script>
