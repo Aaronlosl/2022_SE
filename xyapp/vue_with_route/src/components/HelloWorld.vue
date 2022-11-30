@@ -72,6 +72,8 @@ export default {
     Login() {
       if (this.username == "" || this.password == "") {
         alert("Please check your input")
+        this.username = ""
+        this.password = ""
       } else {
         axios.post('http://127.0.0.1:8000/json/auth/', { username: this.username, password: this.password })
           .then((response) => {

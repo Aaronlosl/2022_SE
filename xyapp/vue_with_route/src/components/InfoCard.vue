@@ -20,6 +20,7 @@
 
     <headPic href="https://" target="_blank" rel="noopener">
       <img src="@/assets/头像-2.svg">
+      <!-- 头像 -->
     </headPic>
 
     <addFriend href="https://" target="_blank" rel="noopener">
@@ -29,18 +30,19 @@
     <name>
       <img src="@/assets/Name.svg">
     </name>
-
+<!-- 名字 -->
     <identity>
       <img src="@/assets/Id.svg">
     </identity>
-
+<!-- ID -->
     <info>
       <img src="@/assets/Info.svg">
     </info>
-
+<!-- Info -->
     <otherInfo>
       <img src="@/assets/O.svg">
     </otherInfo>
+<!-- email -->
   </div>
 </template>
 
