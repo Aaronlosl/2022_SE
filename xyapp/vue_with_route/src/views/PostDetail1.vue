@@ -24,6 +24,9 @@
         <textarea maxlength="500" placeholder="less than 500 characters" cols="32" rows="10" style="resize:none;"
           v-model="content"></textarea><br>
       </p>
+      <el-upload action="" :on-change="handleelchange"  :auto-upload="false" list-type="picture-card" accept="image/png,image/gif,image/jpg,image/jpeg" :limit="1">
+        <i class="el-icon-plus"></i>
+      </el-upload>
     </h2>
 
     <el-button style="margin-left: 14%; " @click="Post()" type="text">
@@ -59,6 +62,7 @@ export default {
     return {
       title: '',
       content: '',
+      formdata: new FormData(),
     }
   },
   methods: {
@@ -66,7 +70,11 @@ export default {
       if (this.title == "" || this.content == "") {
         alert("Please check your input")
       } else {
-        axios.post('http://127.0.0.1:8000/json/post/', { title: this.title, content: this.content, post_type: "Student Request" })
+        console.log(this.formdata)
+        this.formdata.append("title", this.title)
+        this.formdata.append("content", this.content)
+        this.formdata.append("post_type", "Student Request")
+        axios.post('http://127.0.0.1:8000/json/post/',this.formdata,{pic:this.formdata,  title: this.title, content: this.content, post_type: "Student Request" })
           .then((response) => {
             console.log(response.data)
             if (response.data['status'] != 1) {
@@ -78,6 +86,19 @@ export default {
             }
           })
       }
+    },
+    handleelchange(file, fileList) {
+      console.log("123")
+      console.log(file, fileList)
+      //this.formdata = file.raw
+      //console.log(this.formdata)
+      
+      this.formdata = new FormData()
+      fileList.map(item => { //fileList本来就是数组，就不用转为真数组了
+        this.formdata.append("pic", item.raw)  //将每一个文件图片都加进formdata
+      })
+      console.log(this.formdata)
+      // axios.post("接口地址", formdata).then(res => { console.log(res) })
     },
   }
   /*

@@ -1,8 +1,11 @@
 <template>
     <li>
-        <a href="https://" target="_blank" rel="noopener">
-            <img src="@/assets/多媒体卡片1.png">
+        <a>
+            <img :src="imgaddr">
+            
+            
         </a>
+
     </li>
     <p>{{ title }}</p>
     <p>{{ date_posted }}</p>
@@ -12,8 +15,23 @@
 <script>
 export default {
     name: "AbstractDis",
-    props: ['title', 'summary', 'date_posted']
-}
+    props: ['title', 'summary', 'date_posted','pk'],
+    data() {
+        return {
+        imgaddr:"",
+        a1:"123"
+        }
+    },
+    
+    mounted() {
+        console.log(this.pk)
+        // this.imgaddr = require("@/assets/" + this.title + ".svg")
+        this.imgaddr = require("../../static/blogs/" + this.pk +"/" + this.pk+".jpg")
+        // root/blogs/title/img.jpg
+        // 
+        
+    },
+    }
 
 const info_img = document.createElement("img");
 let img_request = new XMLHttpRequest();

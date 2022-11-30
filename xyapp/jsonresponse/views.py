@@ -118,6 +118,7 @@ def home(request):
             id+=1
             if id>(page-1)*PG_SIZE:
                 obj_content={}
+                obj_content['pk']=obj.pk
                 obj_content['title']=obj.title
                 obj_content['content']=obj.content
                 obj_content['author']=obj.author.username
@@ -146,13 +147,34 @@ def receive_post(request):
     if len(User.objects.filter(username=name)) != 1:
         rep=JsonResponse({'status':-1,'message':'name not found'})
         return rep
-    dic=json.loads(request.body)
+    # dic=json.loads(request.body)
+    dic=request.POST
+    print(request.POST)
+    file = request.FILES.get('pic', None)
     # if request tells this post have a TYPE
     _type = "ALL"
     if 'post_type' in dic.keys():
         _type = dic['post_type']
     post=MyPost(title=dic["title"],content=dic["content"],author=User.objects.filter(username=name)[0],post_type=_type)
     post.save()
+    if file:
+        print("receive an img")
+        print(file.name)
+        # save image
+        filename = str(post.pk) +"."+file.name.split(".")[1]
+        print(filename)
+        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static","blogs", str(post.pk))):
+            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static","blogs", str(post.pk)))
+        image = Image.open(file)
+        if image:
+            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static","blogs", str(post.pk), filename)
+            image.save(r'%s' % path)
+        else:
+            rep = JsonResponse({"status":-3, "message":"invalid image"})
+            return rep
+        
+        return JsonResponse({'status':1,'message':'post with pic successfully !'})
+    
     rep=JsonResponse({'status':1,'message':'post successfully !'})
     # rep.delete_cookie('login_status')
     return rep
