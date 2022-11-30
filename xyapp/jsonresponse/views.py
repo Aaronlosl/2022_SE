@@ -294,23 +294,42 @@ def show_avatar(request):
         return JsonResponse({"status":-1, "message":"invalid format"})
 
 
+academy_option_list = {
+    '1':'数学科学学院',
+    '2':'物理学院',
+    '3':'化学与分子工程学院',
+    '4':'生命科学学院',
+    '5':'地球空间科学学院',
+    '6':'工学院',
+    '7':'信息科学技术学院',
+}
+from datetime import datetime
+
 def mark_ad_post(request):
+    global academy_option_list
     dic = json.loads(request.body)
 
-    with open('results.json', 'w') as result_file:
-        json.dump(dic, result_file)
-
     key1, key2, key3 = dic['academy'], dic['institution'], dic['professor']
+    key1 = academy_option_list[key1[-1]]
     starting_date = dic['starting_date']
+    format_pattern = '%Y-%m-%dT%H:%M:%S.%fZ'
+    starting_date = datetime.strptime(starting_date, format_pattern)
+    starting_date = starting_date.strftime("%Y-%m-%d")
     try:
-        post_set = AdvancedPost.objects.filter(professor__contains=key3)
+        post_set = AdvancedPost.objects.filter(academy__contains=key1).filter(professor__contains=key3)
         for obj in post_set:
-            with open('results2.json', 'w') as result_file:
-                dic.update({'date':obj.date_posted})
-                json.dump(dic, result_file)
-            if obj.date_posted >= starting_date:
-                obj.post_visible = "YES"
-                obj.save()
+            try:
+                #with open('results.json', 'w') as result_file:
+                 #   json.dump({'starting_date':starting_date,'post_time':obj.date_posted}, result_file)
+                post_date = obj.date_posted.date().strftime("%Y-%m-%d")
+                with open('results.json', 'w') as result_file:
+                    json.dump({'post_time':post_date,'starting_date':starting_date}, result_file)
+                difference = datetime.strptime(post_date, "%Y-%m-%d") - datetime.strptime(starting_date, "%Y-%m-%d")
+                if difference.days > 0:
+                    obj.post_visible = "YES"
+                    obj.save()
+            except:
+                pass
     except:
         pass
     rep = JsonResponse({"status": 1,"message":"search successfully !"})
