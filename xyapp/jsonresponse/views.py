@@ -163,11 +163,11 @@ def receive_post(request):
         # save image
         filename = str(post.pk) +"."+file.name.split(".")[1]
         print(filename)
-        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static","blogs", str(post.pk))):
-            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static","blogs", str(post.pk)))
+        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "dist","static","blogs", str(post.pk))):
+            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "dist","static","blogs", str(post.pk)))
         image = Image.open(file)
         if image:
-            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static","blogs", str(post.pk), filename)
+            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static","blogs", str(post.pk), filename)
             image.save(r'%s' % path)
         else:
             rep = JsonResponse({"status":-3, "message":"invalid image"})
@@ -238,6 +238,8 @@ def show_friends(request):
         f1 = Friend.objects.filter(name1=dic['name'])
         f2 = Friend.objects.filter(name2=dic['name'])
         f = []
+        u = UserInfo.objects.filter(author=dic['name'])
+        f.append(u[0].author)
         for i in f1:
             if i.name2!=dic['name']:
                 f.append(i.name2)
@@ -254,12 +256,21 @@ def show_friends(request):
 def change_avatar(request):
     file = request.FILES.get('avatar', None)
     username = request.POST.get("name")
+    # dic=json.loads(request.body)
+    # dic=request.POST
+    #if ('name' in dic.keys()):
+        #if(dic['name']==' '):
+            # user = User.objects.filter(username=request.COOKIES['login_status'])
+            #dic['name']=request.COOKIES['login_status']
+        #else:
+            #user = User.objects.filter(username=dic['name'])
     userinfo = UserInfo.objects.filter(author=username)
     if len(userinfo) == 0:
         userinfo = UserInfo(author=username)
     else:
         userinfo = userinfo[0]
     username = userinfo.author
+    #file = dic['avatar']
     if file:
         # save image
         filename = file.name
@@ -281,14 +292,15 @@ def change_avatar(request):
         userinfo.avatar = filename
         userinfo.save()
         return JsonResponse({"status":0, "message":"change success"})
-    # else:
-        # return JsonResponse({"status":-1, "message":"invalid format"})
+    else:
+        return JsonResponse({"status":-1, "message":"invalid format"})
 
 def show_avatar(request):
-    username = request.POST.get("name")
-    userinfo = UserInfo.objects.filter(author=username)
+    dic=json.loads(request.body)
+    # username = request.POST.get("name")
+    userinfo = UserInfo.objects.filter(author=dic['name'])
     if len(userinfo) == 0:
-        userinfo = UserInfo(author=username)
+        userinfo = UserInfo(author=dic['name'])
     else:
         userinfo = userinfo[0]
     username = userinfo.author
@@ -298,7 +310,8 @@ def show_avatar(request):
     path = os.path.join(Path(__file__).resolve().parent.parent, "jsonresponse", "static", username, filename)
     image = open(path, "rb").read()
     if image:
-        return HttpResponse(image, content_type="image/png")
+        paths = [username, filename]
+        return JsonResponse({"status":0, "content":paths})
     else:
         return JsonResponse({"status":-1, "message":"invalid format"})
 

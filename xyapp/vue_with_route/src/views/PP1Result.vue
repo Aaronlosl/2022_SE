@@ -5,17 +5,26 @@
 <template>
   <div class="PP1Result">
     <router-view></router-view>
-    <abstract-dis-1 v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+    <!--
+      <abstract-dis-1 v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
       :date_posted="blog.date_posted">
-    </abstract-dis-1><br>
-    <abstract-dis-1></abstract-dis-1><br>
-    <abstract-dis-1></abstract-dis-1><br>
-    <navi-box></navi-box>
+      </abstract-dis-1><br>
+      <abstract-dis-1></abstract-dis-1><br>
+      <abstract-dis-1></abstract-dis-1><br>
+    -->
+    
+    <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+      :date_posted="blog.date_posted" :pk="blog.pk">
+    </AbstractDis><br/>
+    <div class="fixed">
+      <navi-box></navi-box>
+    </div>
   </div>
 </template>
 <script>
 import NaviBox from '@/components/NaviBox.vue';
-import AbstractDis1 from '@/components/AbstractDis1.vue';
+// import AbstractDis1 from '@/components/AbstractDis1.vue';
+import AbstractDis from '@/components/AbstractDis.vue';
 
 import axios from "axios"
 // import { Search } from '@element-plus/icons-vue'
@@ -31,7 +40,7 @@ axios.interceptors.request.use((config) => {
 
 export default {
   name: "PP1",
-  components: { NaviBox, AbstractDis1, },
+  components: { NaviBox, AbstractDis, },
   data() {
     return {
       bloglist: [],

@@ -19,14 +19,19 @@ export default {
     data() {
         return {
         imgaddr:"",
-        a1:"123"
+        a1:"123",
+        publicPath:process.env.BASE_URL
         }
     },
     
     mounted() {
         console.log(this.pk)
         // this.imgaddr = require("@/assets/" + this.title + ".svg")
-        this.imgaddr = require("../../static/blogs/" + this.pk +"/" + this.pk+".jpg")
+        // this.imgaddr = require("../../static/blogs/" + this.pk +"/" + this.pk+".jpg")
+        this.imgaddr = this.publicPath + "static/blogs/" + this.pk +"/" + this.pk+".jpg"
+        //this.imgaddr = "/static/blogs/" + this.pk +"/" + this.pk+".jpg"
+        
+        console.log(this.imgaddr)
         // root/blogs/title/img.jpg
         // 
         

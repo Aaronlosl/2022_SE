@@ -10,6 +10,11 @@
 
     <contact v-for="friend in friends" :key="friend" :friend="friend"></contact><br>
 
+    <el-form-item label="upload" prop="">
+      <el-button size="small" type="primary" @click="select()">Upload Profile Photo<i class="el-icon-upload el-icon--right"></i></el-button><br>
+      <input type="file" id="file" ref="upload" style="visibility:hidden" @change="update($event)" accept="image/*">
+    </el-form-item>
+
 
     <navi-box></navi-box>
   </div>
@@ -33,6 +38,7 @@ export default {
   data() {
     return {
       friends: [],
+
     }
   },
   mounted() {
@@ -50,7 +56,28 @@ export default {
             this.friends = response.data['content']
           }
         })
-    }
+    },
+    select() {
+      this.$refs.upload.click()
+    },
+    update(event) {
+      console.log(arguments)
+      const file = event.target.files[0]
+      let param = new FormData()
+      param.append('avatar', file)
+      console.log(param.get('file'))
+      axios.post('http://127.0.0.1:8000/json/changeAvatar/',  param, {name:this.friends[0] })
+        .then((response) => {
+          console.log(response.data)
+          console.log(this.$refs.file)
+          console.log(this.$refs.file.files[0])
+          if (response.data['status'] == 0) {
+            alert('change success!')
+          } else {
+            alert('invalid!')
+          }
+        })
+    },
   },
 }
 </script>

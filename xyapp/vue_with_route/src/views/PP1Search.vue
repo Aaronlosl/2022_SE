@@ -15,8 +15,10 @@
         <textarea class="helping information input box" maxlength="50" placeholder="less than 50 chars" cols="32"
           style="resize:none; margin-bottom: 10px;" v-model="searchBox">
           </textarea>
-        <el-input v-model="searchBox" maxlength="25" placeholder="less than 25 chars" clearable>
-        </el-input>
+        <!--
+          <el-input v-model="searchBox" maxlength="25" placeholder="less than 25 chars" clearable>
+          </el-input>
+        -->
         <searchBtn href="https://" target="_blank" rel="noopener">
           <img src="@/assets/search.svg" style="margin-bottom: 15px;">
         </searchBtn>
@@ -43,18 +45,21 @@
     <el-button @click="Search()">
       <img src="@/assets/search.svg">
     </el-button>
-    <router-link to='/PP1Search/PP1Result'>
-      <img src="@/assets/search.svg" style="margin-bottom: 15px;">
-    </router-link>
+    
     <RouterView></RouterView>
-
+    <div>
+      <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+        :date_posted="blog.date_posted" :pk="blog.pk">
+      </AbstractDis><br/>
+    </div>
+    
     <navi-box></navi-box>
   </div>
 </template>
 
 <script>
 import NaviBox from '@/components/NaviBox.vue';
-
+import AbstractDis from '@/components/AbstractDis.vue';
 import axios from "axios"
 import { } from '@element-plus/icons-vue'
 
@@ -69,16 +74,18 @@ axios.interceptors.request.use((config) => {
 
 
 export default {
-  components: { NaviBox },
+  components: { NaviBox,AbstractDis,},
   name: 'PP1Search',
   data() {
     return {
       showFixedSearch: false,
       showFixedBottom: false,
       searchBox: "",
+      bloglist: [],
     }
   },
   mounted() {
+    this.showBlogs()
     // 监听页面滚动事件
     window.addEventListener("scroll", this.showSearch)
   },
@@ -103,6 +110,18 @@ export default {
         })
       }
     },
+    showBlogs() {
+      axios.post('http://127.0.0.1:8000/json/home/', {post_type: "Student Request" })
+        .then((response) => {
+          console.log(response.data)
+          if (response.data['status'] != 1) {
+            alert('Sorry but you are not login')
+            this.$router.push('/');
+          } else {
+            this.bloglist = response.data['content']
+          }
+        })
+    }
   }
 }
 </script>
