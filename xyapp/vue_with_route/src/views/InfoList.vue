@@ -9,12 +9,10 @@
     <img src="@/assets/分割线-2.svg"><br>
 
     <contact v-for="friend in friends" :key="friend" :friend="friend"></contact><br>
-
-    <el-form-item label="upload" prop="">
-      <el-button size="small" type="primary" @click="select()">Upload Profile Photo<i class="el-icon-upload el-icon--right"></i></el-button><br>
-      <input type="file" id="file" ref="upload" style="visibility:hidden" @change="update($event)" accept="image/*">
-    </el-form-item>
-
+    <el-upload action="" :on-change="update"  :auto-upload="false" :multiple="false" :file-list="fileList" accept="image/png,image/gif,image/jpg,image/jpeg" :limit="1">
+        <i class="el-icon-plus"></i>
+        <el-button size="small" type="primary">Upload Profile Photo<i class="el-icon-upload el-icon--right"></i></el-button><br>
+    </el-upload>
 
     <navi-box></navi-box>
   </div>
@@ -38,7 +36,7 @@ export default {
   data() {
     return {
       friends: [],
-
+      param: new FormData(),
     }
   },
   mounted() {
@@ -57,20 +55,21 @@ export default {
           }
         })
     },
-    select() {
-      this.$refs.upload.click()
+    select(file, fileList) {
+      this.param = new FormData()
+      fileList.map(item => {
+        this.param.append("avatar", item.raw)
+      })
     },
-    update(event) {
-      console.log(arguments)
-      const file = event.target.files[0]
-      let param = new FormData()
-      param.append('avatar', file)
-      console.log(param.get('file'))
-      axios.post('http://127.0.0.1:8000/json/changeAvatar/',  param, {name:this.friends[0] })
+    update(file, fileList) {
+      this.param = new FormData()
+      fileList.map(item => {
+        this.param.append("avatar", item.raw)
+      })
+      this.param.append('name', this.friends[0])
+      axios.post('http://127.0.0.1:8000/json/changeAvatar/',  this.param, {avatar: this.param, name:this.friends[0] })
         .then((response) => {
-          console.log(response.data)
-          console.log(this.$refs.file)
-          console.log(this.$refs.file.files[0])
+          
           if (response.data['status'] == 0) {
             alert('change success!')
           } else {

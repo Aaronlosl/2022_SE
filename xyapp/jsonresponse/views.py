@@ -273,12 +273,14 @@ def change_avatar(request):
     #file = dic['avatar']
     if file:
         # save image
+
+        
         filename = file.name
-        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "jsonresponse", "static", username)):
-            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "jsonresponse", "static", username))
+        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username)):
+            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username))
         image = Image.open(file)
         if image:
-            path = os.path.join(Path(__file__).resolve().parent.parent, "jsonresponse", "static", username, filename)
+            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username, filename)
             image.save(r'%s' % path)
         else:
             rep = JsonResponse({"status":-3, "message":"invalid image"})
@@ -286,7 +288,7 @@ def change_avatar(request):
         # remove
         last = userinfo.avatar
         try:
-            os.remove(os.path.join(Path(__file__).resolve().parent.parent, "jsonresponse", "static", username, last))
+            os.remove(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route",  "static", "avatars", username, last))
         except:
             pass
         userinfo.avatar = filename
@@ -307,7 +309,7 @@ def show_avatar(request):
     filename = userinfo.avatar
     if not (username and filename):
         return JsonResponse({"status":-1, "message":"invalid format"})
-    path = os.path.join(Path(__file__).resolve().parent.parent, "jsonresponse", "static", username, filename)
+    path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username, filename)
     image = open(path, "rb").read()
     if image:
         paths = [username, filename]

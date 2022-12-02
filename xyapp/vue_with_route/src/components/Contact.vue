@@ -1,6 +1,6 @@
 <template>
     <button @click="clickHand(friend)">{{ friend}}</button><br>
-    <!--<button @click="judge(friend)">{{ friend}}</button><br> -->
+    <!-- <button @click="judge(friend)">{{ friend}}</button><br> -->
     <a style="margin-right: 240px">
         <router-link to="/InfoList/InfoDetail/bob">
             <img v-show="isShow" :src="paths">
@@ -38,9 +38,11 @@ export default {
                 .then((response) => {
                     console.log(response.data)
                     if(response.data['status'] == 0){
-                        this.isShow = !this.isShow
+                        this.isShow = true
                         this.p = response.data['content']
-                        this.paths = require('../../../jsonresponse/static/' + this.p[0] + '/' + this.p[1])
+                        this.paths = require("../../static/avatars/" + this.p[0] + '/' + this.p[1])
+                    } else {
+                        this.isShow = false
                     }
                 })
         }
