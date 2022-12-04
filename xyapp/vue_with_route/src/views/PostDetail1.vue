@@ -33,9 +33,6 @@
       </el-button>
     </h2>
 
-
-    <!-- TODO：增加图片上传按钮和功能 -->
-
     <navi-box></navi-box>
 
   </div>
