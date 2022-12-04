@@ -2,6 +2,8 @@
 
 <img src="./xyapp/vue_with_route/src/assets/logo.svg">
 
+[材料提交](https://disk.pku.edu.cn/link/A53FEA0B967BFEF39C6C7EA2BE4DDBE3)
+
 **软工周会记录**
 
 1. 定选题：郝泽成，封项晨
@@ -43,3 +45,9 @@
         2. 模糊搜索后端代码 - django代码 - hzc
         3. 上传图片和element UI Button对接 - vue和css代码 - hyt
         4. 浮窗，滑框，吸顶 - vue代码 - yzw *
+13. ***分工*** 11.27 第四阶段迭代
+    1.  项目测试：yzw
+14. ***分工*** 12.4 第五阶段迭代
+    1.  前端：项目测试完善
+    2.  后端：项目上服
+    3.  项目最终成果展示
