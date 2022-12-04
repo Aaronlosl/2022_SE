@@ -2,41 +2,38 @@
     <li>
         <a>
             <img :src="imgaddr">
-            
-            
         </a>
-
     </li>
     <p>{{ title }}</p>
     <p>{{ date_posted }}</p>
-    <p>{{ summary}}</p>
+    <p>{{ summary }}</p>
 </template>
 
 <script>
 export default {
     name: "AbstractDis",
-    props: ['title', 'summary', 'date_posted','pk'],
+    props: ['title', 'summary', 'date_posted', 'pk'],
     data() {
         return {
-        imgaddr:"",
-        a1:"123",
-        publicPath:process.env.BASE_URL
+            imgaddr: "",
+            a1: "123",
+            publicPath: process.env.BASE_URL
         }
     },
-    
+
     mounted() {
         console.log(this.pk)
         // this.imgaddr = require("@/assets/" + this.title + ".svg")
         // this.imgaddr = require("../../static/blogs/" + this.pk +"/" + this.pk+".jpg")
-        this.imgaddr = this.publicPath + "static/blogs/" + this.pk +"/" + this.pk+".jpg"
+        this.imgaddr = this.publicPath + "static/blogs/" + this.pk + "/" + this.pk + ".jpg"
         //this.imgaddr = "/static/blogs/" + this.pk +"/" + this.pk+".jpg"
-        
+
         console.log(this.imgaddr)
         // root/blogs/title/img.jpg
         // 
-        
+
     },
-    }
+}
 
 const info_img = document.createElement("img");
 let img_request = new XMLHttpRequest();
@@ -58,8 +55,8 @@ a {
     position: static;
     left: 42px;
     top: 161px;
-    width: 328px;
-    height: 396px;
+    width: 320px;
+    height: 386px;
     display: flex;
     flex-direction: column;
     padding: 24px;

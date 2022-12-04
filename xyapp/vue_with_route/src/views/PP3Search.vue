@@ -9,15 +9,15 @@
     <transition enter-active-class="animate__animated animate__fadeIn"
       leave-active-class="animate__animated animate__fadeOut">
       <div class="fixedSearch" v-show="showFixedSearch">
-        <searchBtn class="searchBtn" href="https://" target="_blank" rel="noopener">
+        <router-link to='/FirstPage'>
           <img src="@/assets/箭头二.svg">
-        </searchBtn>
-        <textarea class="helping information input box" maxlength="50" placeholder="less than 50 chars" cols="32"
-          style="resize:none; margin-bottom: 10px;" v-model="searchBox">
-          </textarea>
-        <searchBtn href="https://" target="_blank" rel="noopener">
-          <img src="@/assets/search.svg" style="margin-bottom: 15px;">
-        </searchBtn>
+        </router-link>
+        <el-input v-model="searchBox" maxlength="50" placeholder="less than 50 chars" suffix-icon="el-icon-search"
+          clearable>
+        </el-input>
+        <el-button @click="Search()" style="margin-top:-3%">
+          <img src="@/assets/search.svg">
+        </el-button>
       </div>
     </transition>
     <br>
@@ -28,13 +28,10 @@
     <el-input v-model="searchBox" maxlength="50" placeholder="less than 50 chars" suffix-icon="el-icon-search"
       clearable>
     </el-input>
-    <el-button @click="Search()">
+    <el-button @click="Search()" style="margin-top:-3%">
       <img src="@/assets/search.svg">
     </el-button>
-    <router-link to='/PP3Search/PP3Result'>
-      
-      <img src="@/assets/search.svg" style="margin-bottom: 15px;">
-    </router-link>
+
     <RouterView></RouterView>
 
     <navi-box></navi-box>

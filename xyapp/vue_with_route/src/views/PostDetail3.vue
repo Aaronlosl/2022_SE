@@ -28,13 +28,13 @@
         <textarea maxlength="500" placeholder="less than 500 characters" cols="32" rows="10" style="resize:none;"
           v-model="content"></textarea><br>
       </p>
+      <!-- TODO：增加图片上传按钮和功能 -->
+
+      <el-button style="margin-left: 14%; " @click="Post()" type="text">
+        <img src="@/assets/send.svg">
+      </el-button>
     </h2>
 
-    <!-- TODO：增加图片上传按钮和功能 -->
-
-    <el-button style="margin-left: 14%; " @click="Post()" type="text">
-      <img src="@/assets/send.svg">
-    </el-button>
 
 
     <navi-box></navi-box>
@@ -85,13 +85,6 @@ export default {
       }
     },
   }
-  /*
-  mounted() {
-      this.showBlogs()
-      // 监听页面滚动事件
-      window.addEventListener("scroll", this.showSearch)
-  },
-  */
 }
 </script>
   

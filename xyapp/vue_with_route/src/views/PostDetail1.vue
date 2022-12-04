@@ -24,14 +24,15 @@
         <textarea maxlength="500" placeholder="less than 500 characters" cols="32" rows="10" style="resize:none;"
           v-model="content"></textarea><br>
       </p>
+        <t style="margin-right: 205px">Photo</t><br>
       <el-upload action="" :on-change="handleelchange"  :auto-upload="false" list-type="picture-card" accept="image/png,image/gif,image/jpg,image/jpeg" :limit="1">
-        <i class="el-icon-plus"></i>
+        <i class="el-icon-plus">Upload</i>
       </el-upload>
+      <el-button style="margin-left: 14%; " @click="Post()" type="text">
+        <img src="@/assets/send.svg">
+      </el-button>
     </h2>
 
-    <el-button style="margin-left: 14%; " @click="Post()" type="text">
-      <img src="@/assets/send.svg">
-    </el-button>
 
     <!-- TODO：增加图片上传按钮和功能 -->
 
