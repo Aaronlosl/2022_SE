@@ -12,7 +12,7 @@
 <script>
 export default {
     name: "AbstractDis",
-    props: ['title', 'summary', 'date_posted', 'pk'],
+    props: ['title', 'summary', 'date_posted', 'pk','img_name'],
     data() {
         return {
             imgaddr: "",
@@ -25,7 +25,8 @@ export default {
         console.log(this.pk)
         // this.imgaddr = require("@/assets/" + this.title + ".svg")
         // this.imgaddr = require("../../static/blogs/" + this.pk +"/" + this.pk+".jpg")
-        this.imgaddr = this.publicPath + "static/blogs/" + this.pk + "/" + this.pk + ".jpg"
+        // this.imgaddr = this.publicPath + "static/blogs/" + this.pk + "/" + this.pk + ".jpg"
+        this.imgaddr = this.publicPath + "static/blogs/" + this.pk + "/" + this.img_name
         //this.imgaddr = "/static/blogs/" + this.pk +"/" + this.pk+".jpg"
 
         console.log(this.imgaddr)

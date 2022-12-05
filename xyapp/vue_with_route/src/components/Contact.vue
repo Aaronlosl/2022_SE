@@ -22,6 +22,7 @@ export default {
             isShow: false,
             paths: '',
             p: [],
+            publicPath: process.env.BASE_URL,
         }
     },
     mounted() {
@@ -40,7 +41,8 @@ export default {
                     if(response.data['status'] == 0){
                         this.isShow = true
                         this.p = response.data['content']
-                        this.paths = require("../../static/avatars/" + this.p[0] + '/' + this.p[1])
+                        // this.paths = require("../../static/avatars/" + this.p[0] + '/' + this.p[1])
+                        this.paths = this.publicPath + "static/avatars/" + this.p[0] + '/' + this.p[1]
                     } else {
                         this.isShow = false
                     }

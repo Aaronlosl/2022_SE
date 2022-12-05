@@ -11,6 +11,7 @@ class MyPost(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post_type = models.CharField(max_length=50,default="ALL")
     post_visible = models.CharField(max_length=50,default="NO")
+    img_name = models.CharField(max_length=100,default="NULL")
     def __str__(self):
         return self.title
 

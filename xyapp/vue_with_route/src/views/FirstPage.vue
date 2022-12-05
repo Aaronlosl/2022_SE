@@ -22,7 +22,7 @@
     <br/>
 
     <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
-      :date_posted="blog.date_posted" :pk="blog.pk">
+      :date_posted="blog.date_posted" :pk="blog.pk" :img_name="blog.img_name">
     </AbstractDis><br/>
     <div class="fixed">
       <navi-box></navi-box>

@@ -10,6 +10,33 @@ from pathlib import Path
 import json, os
 from postapp.mysearch import search_strategy
 # Create your views here.
+def circle(ima):
+    ima=ima.convert("RGBA")
+    size = ima.size
+    # 要使用圆形，所以使用刚才处理好的正方形的图片
+    r2 = min(size[0], size[1])
+    if size[0] != size[1]:
+        ima = ima.resize((r2, r2), Image.ANTIALIAS)
+    # 最后生成圆的半径
+    r3 = int(r2/2)
+    imb = Image.new('RGBA', (r3*2, r3*2),(255,255,255,0))
+    pima = ima.load() # 像素的访问对象
+    pimb = imb.load()
+    r = float(r2/2) #圆心横坐标
+ 
+    for i in range(r2):
+        for j in range(r2):
+            lx = abs(i-r) #到圆心距离的横坐标
+            ly = abs(j-r)#到圆心距离的纵坐标
+            l = (pow(lx,2) + pow(ly,2))** 0.5 # 三角函数 半径
+            if l < r3:
+                pimb[i-(r-r3),j-(r-r3)] = pima[i,j]
+    # path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","test.png")
+    # imb.save(r'%s' % path)
+    # print("here")
+    return imb
+
+
 def echo(request):
     content={}
     if request.method == 'GET':
@@ -124,6 +151,7 @@ def home(request):
                 obj_content['author']=obj.author.username
                 obj_content['date_posted']=obj.date_posted
                 obj_content['summary']=obj.content[0:20]
+                obj_content['img_name']=obj.img_name
                 content.append(obj_content)
                 cnt+=1
                 if cnt>=PG_SIZE:
@@ -158,10 +186,17 @@ def receive_post(request):
     post=MyPost(title=dic["title"],content=dic["content"],author=User.objects.filter(username=name)[0],post_type=_type)
     post.save()
     if file:
+
         print("receive an img")
+        print(post.pk)
         print(file.name)
+
+        filename = file.name
+        post.img_name = filename
+        post.save()
         # save image
-        filename = str(post.pk) +"."+file.name.split(".")[1]
+        # filename = str(post.pk) +"."+file.name.split(".")[1]
+        
         print(filename)
         if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "dist","static","blogs", str(post.pk))):
             os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "dist","static","blogs", str(post.pk)))
@@ -173,6 +208,7 @@ def receive_post(request):
             rep = JsonResponse({"status":-3, "message":"invalid image"})
             return rep
         
+        # post.save()
         return JsonResponse({'status':1,'message':'post with pic successfully !'})
     
     rep=JsonResponse({'status':1,'message':'post successfully !'})
@@ -276,11 +312,16 @@ def change_avatar(request):
 
         
         filename = file.name
-        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username)):
-            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username))
+        filename = "avatar.png"
+        filename = file.name.split(".")[0] +".png"
+        if not os.path.exists(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static", "avatars", username)):
+            os.mkdir(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static", "avatars", username))
         image = Image.open(file)
         if image:
-            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username, filename)
+            print(image.size)
+            image = image.resize((64, 64))
+            image = circle(image)
+            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static", "avatars", username, filename)
             image.save(r'%s' % path)
         else:
             rep = JsonResponse({"status":-3, "message":"invalid image"})
@@ -288,7 +329,7 @@ def change_avatar(request):
         # remove
         last = userinfo.avatar
         try:
-            os.remove(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route",  "static", "avatars", username, last))
+            os.remove(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist",  "static", "avatars", username, last))
         except:
             pass
         userinfo.avatar = filename
@@ -309,7 +350,7 @@ def show_avatar(request):
     filename = userinfo.avatar
     if not (username and filename):
         return JsonResponse({"status":-1, "message":"invalid format"})
-    path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route", "static", "avatars", username, filename)
+    path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static", "avatars", username, filename)
     image = open(path, "rb").read()
     if image:
         paths = [username, filename]
