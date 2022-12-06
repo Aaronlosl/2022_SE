@@ -469,3 +469,25 @@ def receive_ad_post(request):
     rep=JsonResponse({'status':1,'message':'post successfully !'})
     # rep.delete_cookie('login_status')
     return rep
+
+
+def update_userinfo(request):
+    if not 'login_status' in request.COOKIES:
+        rep=JsonResponse({"status":0,"message":"sorry but you are not login"})
+        return rep
+    dic = json.loads(request.body)
+    username = request.COOKIES.get('login_status')
+    userinfo = UserInfo.objects.filter(author=username)
+    if username != dic['name']:
+        rep=JsonResponse({"status":0,"message":"sorry but you have no permission to modify"})
+        return rep
+    if len(userinfo) == 0:
+        userinfo = UserInfo(author=username)
+    else:
+        userinfo = userinfo[0]
+    userinfo.identity = dic["identity"]
+    userinfo.info = dic["info"]
+    userinfo.optical_contact_info = dic["optical_contact_info"]
+    userinfo.save()
+    rep=JsonResponse({'status':1, 'message':'update successfully !'})
+    return rep
