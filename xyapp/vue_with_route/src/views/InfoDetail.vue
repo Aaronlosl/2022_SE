@@ -20,7 +20,7 @@
     </moreInfoBtn>
 
     <headPic href="https://" target="_blank" rel="noopener">
-      <img src="@/assets/头像-2.svg">
+      <img :src="avatar">
       <!-- 头像 -->
     </headPic>
 
@@ -64,7 +64,9 @@ export default {
       name: '',
       identity: '',
       info: '',
-      optional: ''
+      optional: '',
+      avatar:'',
+      publicPath: process.env.BASE_URL,
     }
   },
   mounted() {
@@ -85,6 +87,7 @@ export default {
             this.identity = this.bloglist[0].identity
             this.info = this.bloglist[0].info
             this.optional = this.bloglist[0].optional
+            this.avatar = this.publicPath + "static/avatars/" + this.name + '/square_' + this.bloglist[0].avatar
           }
         })
     }

@@ -2,7 +2,7 @@
     <button @click="clickHand(friend)">{{ friend}}</button><br>
     <!-- <button @click="judge(friend)">{{ friend}}</button><br> -->
     <a style="margin-right: 240px">
-        <router-link to="/InfoList/InfoDetail/bob">
+        <router-link :to="url">
             <img v-show="isShow" :src="paths">
             <img v-show="!isShow" src="@/assets/头像.svg">
         </router-link>
@@ -23,10 +23,13 @@ export default {
             paths: '',
             p: [],
             publicPath: process.env.BASE_URL,
+            url: '',
         }
     },
     mounted() {
+        
         this.judge(this.friend)
+
     },
     methods: {
         clickHand(id) {
@@ -41,6 +44,7 @@ export default {
                     if(response.data['status'] == 0){
                         this.isShow = true
                         this.p = response.data['content']
+                        this.url = "/InfoList/InfoDetail/" + this.p[0]
                         // this.paths = require("../../static/avatars/" + this.p[0] + '/' + this.p[1])
                         this.paths = this.publicPath + "static/avatars/" + this.p[0] + '/' + this.p[1]
                     } else {

@@ -302,7 +302,8 @@ def showUserInfo(request):
         'name': u.author,
         'identity': u.identity,
         'info': u.info,
-        'optional': u.optical_contact_info
+        'optional': u.optical_contact_info,
+        'avatar': u.avatar
     })
 
     with open('results.json', 'w') as result_file:
@@ -342,10 +343,13 @@ def change_avatar(request):
         image = Image.open(file)
         if image:
             print(image.size)
+            image2 = image.resize((128, 128))
             image = image.resize((64, 64))
             image = circle(image)
             path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static", "avatars", username, filename)
             image.save(r'%s' % path)
+            path = os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist", "static", "avatars", username, "square_"+filename)
+            image2.save(r'%s' % path)
         else:
             rep = JsonResponse({"status":-3, "message":"invalid image"})
             return rep
@@ -353,6 +357,11 @@ def change_avatar(request):
         last = userinfo.avatar
         try:
             os.remove(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist",  "static", "avatars", username, last))
+        except:
+            pass
+
+        try:
+            os.remove(os.path.join(Path(__file__).resolve().parent.parent, "vue_with_route","dist",  "static", "avatars", username, "square_"+last))
         except:
             pass
         userinfo.avatar = filename
