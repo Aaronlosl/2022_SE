@@ -31,7 +31,7 @@ def cos_sim(str1, str2):
         p_str2.append(co_str2[temp])
     p_str1 = np.array(p_str1)
     p_str2 = np.array(p_str2)
-    return p_str1.dot(p_str2) / (np.sqrt(p_str1.dot(p_str1)) * np.sqrt(p_str2.dot(p_str2)))
+    return p_str1.dot(p_str2) / (np.sqrt(p_str1.dot(p_str1)) * np.sqrt(p_str2.dot(p_str2)) + 0.001)
 
 
 def search_strategy(s, titles, obj_pk):

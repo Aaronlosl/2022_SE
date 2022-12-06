@@ -289,6 +289,29 @@ def show_friends(request):
         rep=JsonResponse({"status":-1,"message":"invalid format"})
         return rep
 
+    
+def showUserInfo(request):
+    if not 'login_status' in request.COOKIES:
+        rep=JsonResponse({"status":0,"message":"sorry but you are not login"})
+        return rep
+    dic=json.loads(request.body)
+
+    u = UserInfo.objects.filter(author=dic['name'])[0]
+    f = []
+    f.append({
+        'name': u.author,
+        'identity': u.identity,
+        'info': u.info,
+        'optional': u.optical_contact_info
+    })
+
+    with open('results.json', 'w') as result_file:
+        json.dump({'author name': u.author, 'identity': u.identity, 'info': u.info, 'optional': u.optical_contact_info}, result_file)
+
+    rep = JsonResponse({"status": 1, "message": "ok", "content": f})
+    return rep
+ 
+
 def change_avatar(request):
     file = request.FILES.get('avatar', None)
     username = request.POST.get("name")
@@ -445,4 +468,26 @@ def receive_ad_post(request):
     post.save()
     rep=JsonResponse({'status':1,'message':'post successfully !'})
     # rep.delete_cookie('login_status')
+    return rep
+
+
+def update_userinfo(request):
+    if not 'login_status' in request.COOKIES:
+        rep=JsonResponse({"status":0,"message":"sorry but you are not login"})
+        return rep
+    dic = json.loads(request.body)
+    username = request.COOKIES.get('login_status')
+    userinfo = UserInfo.objects.filter(author=username)
+    if username != dic['name']:
+        rep=JsonResponse({"status":0,"message":"sorry but you have no permission to modify"})
+        return rep
+    if len(userinfo) == 0:
+        userinfo = UserInfo(author=username)
+    else:
+        userinfo = userinfo[0]
+    userinfo.identity = dic["identity"]
+    userinfo.info = dic["info"]
+    userinfo.optical_contact_info = dic["optical_contact_info"]
+    userinfo.save()
+    rep=JsonResponse({'status':1, 'message':'update successfully !'})
     return rep
