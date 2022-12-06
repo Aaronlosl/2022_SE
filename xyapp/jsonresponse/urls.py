@@ -17,5 +17,6 @@ urlpatterns = [
     path('advpost/', views.receive_ad_post, name='advpost'),
     path('markpost/', views.mark_ad_post, name='markpost'),
     path('showpost/', views.show_ad_post, name='showpost'),
-    path('showUserInfo/', views.showUserInfo, name='showUserInfo')
+    path('showUserInfo/', views.showUserInfo, name='showUserInfo'),
+    path('update_userinfo/', views.update_userinfo, name='update_userinfo')
 ]
