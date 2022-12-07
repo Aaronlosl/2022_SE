@@ -1,15 +1,22 @@
 <template>
-    <button @click="clickHand(friend)">{{ friend}}</button><br>
-    <!-- <button @click="judge(friend)">{{ friend}}</button><br> -->
-    <a style="margin-right: 240px">
-        <router-link :to="url">
-            <img v-show="isShow" :src="paths">
-            <img v-show="!isShow" src="@/assets/头像.svg">
-        </router-link>
-        <br>
-    </a>
+    <table class="mytable">
+        <tbody>
+            <td class="head">
+                <router-link :to="url">
+                    <img v-show="isShow" :src="paths">
+                    <img v-show="!isShow" src="@/assets/头像.svg">
+                </router-link>
+            </td>
+
+            <td class="txt">
+                <button @click="clickHand(friend)">{{ friend }}
+                </button>
+            </td>
+        </tbody>
+    </table>
+    
     <img src="@/assets/分割线-2.svg">
-    <br>
+    
 </template>
 
 <script>
@@ -67,3 +74,9 @@ img_request.onload = function () {
 }
 
 </script>
+
+<style>
+    table {margin: auto;} body{text-align: center;}
+    .head {width: 80px;}
+    .txt {width: 200px}
+</style>
