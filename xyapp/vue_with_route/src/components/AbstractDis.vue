@@ -1,12 +1,10 @@
 <template>
-    <li>
-        <a>
-            <img :src="imgaddr">
-        </a>
-    </li>
-    <p>{{ title }}</p>
-    <p>{{ date_posted }}</p>
-    <p>{{ summary }}</p>
+    <a>
+        <img :src="imgaddr">
+        <p>{{ title }}</p>
+        <p>{{ date_posted }}</p>
+        <p>{{ summary }}</p>
+    </a>
 </template>
 
 <script>
@@ -57,7 +55,7 @@ a {
     left: 42px;
     top: 161px;
     width: 320px;
-    height: 386px;
+    
     display: flex;
     flex-direction: column;
     padding: 24px;
@@ -68,10 +66,5 @@ a {
 
     /* 阴影/低阴影 */
     box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.16);
-}
-
-li {
-    display: inline-block;
-    margin: 100px 0px;
 }
 </style>
