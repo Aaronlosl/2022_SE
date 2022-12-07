@@ -31,13 +31,16 @@
     <el-button @click="Search()" style="margin-top:-3%">
       <img src="@/assets/search.svg">
     </el-button>
+  </div>
 
     <RouterView></RouterView>
-    <div>
+    <li>
       <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
         :date_posted="blog.date_posted" :pk="blog.pk" :img_name="blog.img_name">
       </AbstractDis><br/>
-    </div>
+    </li>
+
+  <div>
     <navi-box></navi-box>
   </div>
 </template>
@@ -154,5 +157,11 @@ searchBtn {
   top: -22px;
   left: -5px;
 }
+
+li {
+  display: inline-block;
+  margin: 100px 0px;
+}
+
 </style>
 
