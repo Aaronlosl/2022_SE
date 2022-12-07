@@ -17,6 +17,7 @@
     <navi-box></navi-box>
   </div>
 </template>
+
 <script>
 import axios from "axios"
 // ensure csrf-token append to post requests

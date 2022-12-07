@@ -6,36 +6,36 @@
 <template>
   <div class="InfoDetail">
     <mid>
-  <div class="PP3 Detail Page">
-    <backBtn href="https://" target="_blank" rel="noopener">
-      <router-link to="/InfoList">
-        <img src="@/assets/箭头二.svg">
-      </router-link>
-    </backBtn>
+      <div class="PP3 Detail Page">
+        <backBtn href="https://" target="_blank" rel="noopener">
+          <router-link to="/InfoList">
+            <img src="@/assets/箭头二.svg">
+          </router-link>
+        </backBtn>
 
-    <moreInfoBtn href="https://" target="_blank" rel="noopener">
-      <router-link to="/UpdateInfo">
-        <img src="@/assets/more-horizontal.svg">
-      </router-link>
-    </moreInfoBtn>
+        <moreInfoBtn href="https://" target="_blank" rel="noopener">
+          <router-link to="/UpdateInfo">
+            <img src="@/assets/more-horizontal.svg">
+          </router-link>
+        </moreInfoBtn>
 
-    <headPic href="https://" target="_blank" rel="noopener">
-      <img :src="avatar">
-      <!-- 头像 -->
-    </headPic>
+        <headPic href="https://" target="_blank" rel="noopener">
+          <img :src="avatar">
+          <!-- 头像 -->
+        </headPic>
 
-    <addFriend href="https://" target="_blank" rel="noopener">
-      <img src="@/assets/user-plus.svg">
-    </addFriend>
+        <addFriend href="https://" target="_blank" rel="noopener">
+          <img src="@/assets/user-plus.svg">
+        </addFriend>
 
-  </div>
+      </div>
     </mid>
   </div>
    <mydiv>
-    <h2>Name: {{ name }}</h2>
-    <h2>Identity: {{ identity }}</h2>
-    <h2>Info: {{ info }}</h2>
-    <h2>Otherinfo: {{ optional }}</h2>
+    <h2>Name: </h2>{{ name }}<br>
+    <h2>Identity: </h2>{{ identity }}<br>
+    <h2>Info: </h2>{{ info }}<br>
+    <h2>Otherinfo: </h2>{{ optional }}<br>
    </mydiv>
 
   <div>
@@ -97,6 +97,10 @@ export default {
 
 
 <style scoped>
+h2 {
+  position: absolute;
+  margin-left: -60px;
+}
 ul {
   list-style-type: none;
   padding: 0;
@@ -113,20 +117,20 @@ b {
 backBtn {
   /* 箭头二 */
   position: absolute;
-  left: -180px;
+  left: -160px;
   top: 25px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   transform: rotate(90);
 }
 
 moreInfoBtn {
   /* more-horizontal */
   position: absolute;
-  left: 105px;
+  left: 70px;
   top: 25px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 headPic {
@@ -143,9 +147,9 @@ addFriend {
   /* user-plus */
   position: absolute;
   left: 105px;
-  top: 144px;
-  width: 50px;
-  height: 50px;
+  top: 104px;
+  width: 20px;
+  height: 20px;
 }
 
 name {

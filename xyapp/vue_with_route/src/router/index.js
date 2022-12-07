@@ -28,6 +28,12 @@ const routes = [
     component: () => import('../views/InfoDetail.vue'),
   },
 
+  {
+    path: '/InfoList/InfoDetail',
+    name: 'InfoDetail_temp',
+    component: () => import('../views/InfoDetail.vue'),
+  },
+
 
   {
     path: '/PP1Search',
