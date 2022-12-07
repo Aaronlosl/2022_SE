@@ -5,17 +5,13 @@
 <template>
   <div class="PP1Result">
     <router-view></router-view>
-    <!--
-      <abstract-dis-1 v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
-      :date_posted="blog.date_posted">
-      </abstract-dis-1><br>
-      <abstract-dis-1></abstract-dis-1><br>
-      <abstract-dis-1></abstract-dis-1><br>
-    -->
     
-    <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
-      :date_posted="blog.date_posted" :pk="blog.pk" :img_name="blog.img_name">
-    </AbstractDis><br/>
+    <li>
+      <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+        :date_posted="blog.date_posted" :pk="blog.pk">
+      </AbstractDis><br/>
+    </li>
+
     <div class="fixed">
       <navi-box></navi-box>
     </div>
@@ -88,6 +84,12 @@ b {
   color: #000000;
   margin: 8px;
 }
+
+li {
+    display: inline-block;
+    margin: 100px 0px;
+}
+
 </style>
 
 

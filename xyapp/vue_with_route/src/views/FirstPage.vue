@@ -6,24 +6,28 @@
 
 <template>
   <div class="PP_entry">
-  <div class="head">
-    <router-link to='/PP1Search'>
-      <img src="@/assets/子页面1按钮.svg">
-    </router-link>
-    <router-link to='/PP2Search'>
-      <img src="@/assets/子页面2按钮.svg">
-    </router-link>
-    <router-link to='/PP3Search'>
-      <img src="@/assets/子页面3按钮.svg">
-    </router-link>
-    <br>
-    <img src="@/assets/分割线.svg">
+    <div class="head">
+      <router-link to='/PP1Search'>
+        <img src="@/assets/子页面1按钮.svg">
+      </router-link>
+      <router-link to='/PP2Search'>
+        <img src="@/assets/子页面2按钮.svg">
+      </router-link>
+      <router-link to='/PP3Search'>
+        <img src="@/assets/子页面3按钮.svg">
+      </router-link>
+      <br>
+      <img src="@/assets/分割线.svg">
     </div>
-    <br/>
+    <br>
+    
+    <li>
+      <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+        :date_posted="blog.date_posted" :pk="blog.pk">
+      </AbstractDis>
+    </li>
+    <br>
 
-    <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
-      :date_posted="blog.date_posted" :pk="blog.pk" :img_name="blog.img_name">
-    </AbstractDis><br/>
     <div class="fixed">
       <navi-box></navi-box>
     </div>
@@ -123,6 +127,11 @@ a {
 b {
   color: #000000;
   margin: 8px;
+}
+
+li {
+    display: inline-block;
+    margin: 10px 0px;
 }
 
 .fixedSearch {

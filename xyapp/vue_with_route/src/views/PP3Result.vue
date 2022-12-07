@@ -6,21 +6,29 @@
 
 <template>
   <div class="PP3">
-    <br>
-    <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
-      :date_posted="blog.date_posted" :pk="blog.pk" :img_name="blog.img_name">
-    </AbstractDis><br>
     
-    <router-view></router-view>
+    <br>
 
+    <li>
+      <abstract-dis-3 v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+        :date_posted="blog.date_posted">
+      </abstract-dis-3>
+      
+      <abstract-dis-3 key="test_title" :title="test_title" :summary="test_summary"
+        :date_posted="test_date_posted">
+      </abstract-dis-3>
+    </li>
+
+    <router-view></router-view>
+    
     <navi-box></navi-box>
   </div>
 </template>
 
 <script>
 import NaviBox from '@/components/NaviBox.vue'
-// mport AbstractDis3 from '@/components/AbstractDis3.vue'
-import AbstractDis from '@/components/AbstractDis.vue';
+import AbstractDis3 from '@/components/AbstractDis3.vue'
+
 import axios from "axios"
 // import { Search } from '@element-plus/icons-vue'
 
@@ -34,7 +42,7 @@ axios.interceptors.request.use((config) => {
 });
 
 export default {
-  components: { NaviBox, AbstractDis },
+  components: { NaviBox, AbstractDis3 },
   name: 'PP3',
   data() {
     return {
@@ -82,4 +90,10 @@ b {
   color: #000000;
   margin: 8px;
 }
+
+li {
+    display: inline-block;
+    margin: 100px 0px;
+}
+
 </style>

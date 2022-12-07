@@ -9,15 +9,19 @@
     <transition enter-active-class="animate__animated animate__fadeIn"
       leave-active-class="animate__animated animate__fadeOut">
       <div class="fixedSearch" v-show="showFixedSearch">
-        <router-link to='/FirstPage'>
+        <searchBtn class="searchBtn" href="https://" target="_blank" rel="noopener">
           <img src="@/assets/箭头二.svg">
-        </router-link>
-        <el-input v-model="searchBox" maxlength="50" placeholder="less than 50 chars" suffix-icon="el-icon-search"
-          clearable>
-        </el-input>
-        <el-button @click="Search()" style="margin-top:-3%">
-          <img src="@/assets/search.svg">
-        </el-button>
+        </searchBtn>
+        <textarea class="helping information input box" maxlength="50" placeholder="less than 50 chars" cols="32"
+          style="resize:none; margin-bottom: 10px;" v-model="searchBox">
+          </textarea>
+        <!--
+          <el-input v-model="searchBox" maxlength="25" placeholder="less than 25 chars" clearable>
+          </el-input>
+        -->
+        <searchBtn href="https://" target="_blank" rel="noopener">
+          <img src="@/assets/search.svg" style="margin-bottom: 15px;">
+        </searchBtn>
       </div>
     </transition>
     <br>
@@ -25,18 +29,31 @@
     <router-link to='/FirstPage'>
       <img src="@/assets/箭头二.svg">
     </router-link>
+    <!--
+      <textarea 
+        class="helping information input box" 
+        maxlength="50" 
+        placeholder="less than 50 chars" 
+        cols="32" 
+        style="resize:none; margin-bottom: 10px;"
+        v-model="searchBox">
+      </textarea>
+      -->
     <el-input v-model="searchBox" maxlength="50" placeholder="less than 50 chars" suffix-icon="el-icon-search"
       clearable>
     </el-input>
-    <el-button @click="Search()" style="margin-top:-3%">
+    <el-button @click="Search()">
       <img src="@/assets/search.svg">
     </el-button>
     
     <RouterView></RouterView>
+
     <div>
-      <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
-        :date_posted="blog.date_posted" :pk="blog.pk" :img_name="blog.img_name">
-      </AbstractDis><br/>
+      <li>
+        <AbstractDis v-for="blog in bloglist" :key="blog.title" :title="blog.title" :summary="blog.summary"
+          :date_posted="blog.date_posted" :pk="blog.pk">
+        </AbstractDis>
+      </li>
     </div>
     
     <navi-box></navi-box>
@@ -155,5 +172,11 @@ searchBtn {
   top: -22px;
   left: -5px;
 }
+
+li {
+    display: inline-block;
+    margin: 10px 0px;
+}
+
 </style>
 
