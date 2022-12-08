@@ -32,10 +32,10 @@
     </mid>
   </div>
    <mydiv>
-    <h2>Name: </h2>{{ name }}<br>
-    <h2>Identity: </h2>{{ identity }}<br>
-    <h2>Info: </h2>{{ info }}<br>
-    <h2>Otherinfo: </h2>{{ optional }}<br>
+    <h2>Name: </h2><br><h3>{{ name }}</h3><br>
+    <h2>Identity: </h2><br><h3>{{ identity }}</h3><br>
+    <h2>Info: </h2><br><h3>{{ info }}</h3><br>
+    <h2>Otherinfo: </h2><br><h3>{{ optional }}</h3><br>
    </mydiv>
 
   <div>
@@ -101,6 +101,12 @@ h2 {
   position: absolute;
   margin-left: -60px;
 }
+
+h3 {
+  position: absolute;
+  margin-left: -40px;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
